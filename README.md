@@ -1,6 +1,8 @@
-# fe
+사용 스택
 
-# FE
+- next js
+- storybook
+- yarn berry
 
 yarn main dev # main 프로젝트 실행
 yarn ui storybook # ui 프로젝트 실행
