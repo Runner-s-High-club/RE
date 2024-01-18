@@ -1,0 +1,15 @@
+{
+  "name": "fe",
+  "packageManager": "yarn@4.0.2",
+  "workspaces": [
+    "apps/*",
+    "common/*"
+  ],
+  "scripts": {
+    "main": "yarn workspace @fe/main",
+    "ui": "yarn workspace @fe/ui"
+  },
+  "dependencies": {
+    "@yarnpkg/plugin-workspace-tools": "^4.0.1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "./ tsconfig.spec.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@fe/ui": ["common/ui/src"]
+    }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./common/ui/src"
+    }
+  ]
+}
