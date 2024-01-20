@@ -1,0 +1,27 @@
+{
+  "name": "@fe/ui",
+  "dependencies": {
+    "init": "^0.1.2",
+    "npx": "^10.2.2",
+    "prop-types": "^15.8.1",
+    "storybook": "^7.6.10"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.10",
+    "@storybook/addon-interactions": "^7.6.10",
+    "@storybook/addon-links": "^7.6.10",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.10",
+    "@storybook/nextjs": "^7.6.10",
+    "@storybook/react": "^7.6.10",
+    "@storybook/test": "^7.6.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sb": "^7.6.10",
+    "webpack": "^5.89.0"
+  },
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  }
+}

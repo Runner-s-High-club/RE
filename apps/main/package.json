@@ -9,8 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fe/ui": "workspace:common/ui",
-    "next": "14.0.4",
+    "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -19,7 +18,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "typescript": "^5"
+    "eslint-config-next": "14.1.0"
   }
 }
