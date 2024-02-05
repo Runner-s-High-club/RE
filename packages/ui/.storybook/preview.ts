@@ -1,6 +1,9 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from '@storybook/react';
+import { Colors, Fonts } from '../src/common/styles/theme';
+import { withThemeFromJSXProvider } from '@storybook/addon-styling';
+import { ThemeProvider } from 'styled-components';
 
-const preview: Preview = {
+export const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
@@ -11,4 +14,12 @@ const preview: Preview = {
   },
 };
 
-export default preview;
+export const decorators = [
+  withThemeFromJSXProvider({
+    themes: {
+      light: { ...Colors, ...Fonts },
+    },
+    defaultTheme: 'light',
+    Provider: ThemeProvider,
+  }),
+];
