@@ -4,7 +4,7 @@ import { ButtonProps } from '../interface/Button.interface';
 const primaryStyle = css`
   border: none;
   background-color: ${({ theme }) => theme.colors?.primary};
-  color: ${({ theme }) => theme.colors?.default};
+  color: ${({ theme }) => theme.colors?.bg_gray000};
   :hover {
     background-color: ${({ theme }) => theme.colors?.primaryHover};
   }
@@ -14,35 +14,29 @@ const primaryStyle = css`
 `;
 
 const outlineStyle = css`
-  background-color: ${({ theme }) => theme.colors?.default};
+  background-color: ${({ theme }) => theme.colors?.outline};
   border-color: ${({ theme }) => theme.colors?.primary};
   border-width: 1px;
   border-style: solid;
   color: ${({ theme }) => theme.colors?.primary};
   :hover {
-    background-color: ${({ theme }) => theme.colors?.defaultHover};
+    border-color: ${({ theme }) => theme.colors?.outlineHover};
+    color: ${({ theme }) => theme.colors?.outlineHover};
   }
   :active {
-    background-color: ${({ theme }) => theme.colors?.defaultActive};
+    border-color: ${({ theme }) => theme.colors?.outlineActive};
+    color: ${({ theme }) => theme.colors?.outlineActive};
   }
-`;
-
-const ghostStyle = css`
-  background-color: ${({ theme }) => theme.colors?.default};
-  border: 1px solid ${({ theme }) => theme.colors?.ghost};
-  color: ${({ theme }) => theme.colors?.ghost_FontColor};
-  :hover {
-    background-color: ${({ theme }) => theme.colors?.ghostHover};
-  }
-  :active {
-    background-color: ${({ theme }) => theme.colors?.ghostActive};
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors?.outline};
+    border: 1px solid ${({ theme }) => theme.colors?.disabled_bg};
+    cursor: not-allowed;
   }
 `;
 
 const variants = {
   primaryStyle: { style: primaryStyle },
-  defaultStyle: { style: outlineStyle },
-  ghostStyle: { style: ghostStyle },
+  outlineStyle: { style: outlineStyle },
 };
 
 export const Wrapper = styled.div`
@@ -78,6 +72,7 @@ export const commonStyle = css<ButtonProps>`
     background-color: ${({ theme }) => theme.colors?.disabled_bg};
     color: ${({ theme }) => theme.colors?.disabled_color};
     border: none;
+    cursor: not-allowed;
     :hover {
       background-color: ${({ theme }) => theme.colors?.disabled_bg};
     }
@@ -100,17 +95,8 @@ export const ButtonStyles = css<ButtonProps>`
   border-radius: ${(props) => (props.radius ? props.radius : 5)}px;
 `;
 
-export const Button = styled.button<ButtonProps>`
+export const ButtonStyle = styled.button<ButtonProps>`
   ${ButtonStyles};
-  ${commonStyle};
-  ${(props) => props.variant && variants[props.variant].style};
-`;
-
-export const IconButton = styled.button<ButtonProps>`
-  width: ${(props) => props.iconSize}px;
-  height: ${(props) => props.iconSize}px;
-  padding: 2%;
-  border-radius: ${(props) => (props.radius ? props.radius : 5)}px;
   ${commonStyle};
   ${(props) => props.variant && variants[props.variant].style};
 `;
