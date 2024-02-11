@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 
 export type buttonSize = 'S' | 'M' | 'L';
-export type Variant = 'primaryStyle' | 'defaultStyle' | 'ghostStyle';
+export type Variant = 'primaryStyle' | 'outlineStyle';
 
 export interface ButtonProps
   extends Omit<
@@ -40,10 +40,6 @@ export interface ButtonProps
    *  버튼 테두리 Radius
    */
   radius?: number;
-  /**
-   *  아이콘 사이즈 (아이콘 사이즈 입력시 정사이즈 비율로 바뀝니다.)
-   */
-  iconSize?: number;
   /**
    * 클릭 이벤트
    */
