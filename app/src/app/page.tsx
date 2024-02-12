@@ -1,7 +1,12 @@
 'use client';
 import Image from 'next/image';
-import styles from './page.module.css';
+import Button from '@/components/button/Button';
+// import Button from '@/components/button/Button';
 
 export default function Home() {
-  return <main className={styles.main}>1111</main>;
+  return (
+    <main>
+      <Button>버튼</Button>
+    </main>
+  );
 }
