@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@fe/ui/src/*'],
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 export default nextConfig;
