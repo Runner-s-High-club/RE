@@ -4,5 +4,30 @@ import { theme } from '@/styles/theme';
 type Theme = typeof theme;
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends Theme {}
+  export interface DefaultTheme {
+    colors: {
+      outline: string;
+      outlineActive: string;
+      outlineHover: string;
+      primary: string;
+      primaryActive: string;
+      primaryHover: string;
+      ghost_FontColor: string;
+      disabled_bg: string;
+      disabled_color: string;
+      success: string;
+      info: string;
+      warning: string;
+      danger: string;
+
+      bg_gray000: string;
+      bg_gray100: string;
+      bg_gray200: string;
+    };
+    fonts: {
+      button_L: string;
+      button_M: string;
+      button_S: string;
+    };
+  }
 }
