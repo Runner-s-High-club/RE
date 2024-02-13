@@ -3,7 +3,7 @@ import {
   ButtonProps,
   Variant,
   buttonSize,
-} from '@/components/button/interface/button.interface';
+} from '@/components/common/button/interface/button.interface';
 
 const primaryStyle = css`
   border: none;

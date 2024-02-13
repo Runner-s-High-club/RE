@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import * as ButtonStyles from '@/components/button/styles/button.style';
-import { ButtonProps } from '@/components/button/interface/button.interface';
+import * as ButtonStyles from '@/components/common/button/styles/button.style';
+import { ButtonProps } from '@/components/common/button/interface/button.interface';
 
 /**
  * 기본 버튼 컴포넌트
