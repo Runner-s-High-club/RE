@@ -17,6 +17,10 @@ const theme = {
     bg_gray000: '#fff',
     bg_gray100: '#fefefe',
     bg_gray200: '#f4f4f4',
+    bg_gray300: '#dadada',
+
+    text_333: '#333',
+    text_4e5968: '#4e5968',
   },
   fonts: {
     button_L: '1rem',

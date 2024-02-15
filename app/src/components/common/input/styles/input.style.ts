@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { InputInterface } from '@/components/common/input/interface/input.interface';
 
 export const Input = styled.input<InputInterface>`
-  background: ${({ theme }) => theme.colors?.bg_gray000};
+  background: ${({ theme }) => theme.colors?.bg_gray200};
   border-color: ${({ theme }) => theme.colors?.primary};
   width: calc(100%);
   height: 50px;
@@ -11,7 +11,7 @@ export const Input = styled.input<InputInterface>`
   border: none;
   &::placeholder {
     font-size: 13px;
-    color: ${({ theme }) => theme.colors?.bg_gray000};
+    color: ${({ theme }) => theme.colors?.text_4e5968};
   }
   &:focus {
     outline: none;

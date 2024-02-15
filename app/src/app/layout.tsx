@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import StyledComponentsRegistry from '../styles/StyledComponentsRegistry';
-import { ThemeProvider } from 'styled-components';
-import theme from '@/styles/theme';
 import StylesProvider from '@/styles/StylesProvider';
+import layoutStyles from '@/app/layout.module.css';
+import Header from '@/components/layout/header/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body>
-        <StylesProvider>{children}</StylesProvider>
+        <StylesProvider>
+          <Header />
+          <section className={layoutStyles.section}>{children}</section>
+        </StylesProvider>
       </body>
     </html>
   );
