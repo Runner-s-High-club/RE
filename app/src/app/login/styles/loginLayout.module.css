@@ -1,5 +1,5 @@
-.section {
-  max-width: 1280px;
+.loginSection {
+  max-width: 768px;
   min-width: 320px;
   height: 100vh;
   background-color: #fefefe;

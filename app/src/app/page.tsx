@@ -6,11 +6,5 @@ import Checkbox from '@/components/common/checkbox/Checkbox';
 // import Button from '@/components/button/Button';
 
 export default function Home() {
-  return (
-    <main>
-      <Button>버튼</Button>
-      <Input />
-      <Checkbox id='1' label='가나다라' />
-    </main>
-  );
+  return <main></main>;
 }
