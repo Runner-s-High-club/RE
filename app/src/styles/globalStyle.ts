@@ -18,7 +18,8 @@ const GlobalStyles = createGlobalStyle`
     vertical-align: baseline;
   }
   body{
-    background-color: #f4f4f4;
+    // TODO: 레이아웃으로 옮겨야하는값
+    /* background-color: #f4f4f4; */
     max-width: 1920px;
     height: 100vh;
   }

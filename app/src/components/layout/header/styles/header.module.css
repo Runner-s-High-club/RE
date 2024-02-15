@@ -1,4 +1,4 @@
-.navContent {
+.navbar {
   height: 64px;
   position: absolute;
   z-index: 100;
@@ -7,12 +7,21 @@
   padding: 0 5%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   min-width: 320px;
+}
+
+.navContent {
+  max-width: 1280px;
+  min-width: 320px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 #logo {
   color: #5dadd9;
+  cursor: pointer;
 }
 
 #menuBox {
@@ -22,13 +31,27 @@
 .menuItem {
   margin-right: 40px;
   font-size: 18px;
-  font-family: 500;
   cursor: pointer;
   transition: 0.2s;
+  font-weight: 400;
+  color: #333;
   @media (max-width: 425px) {
+    margin-right: 10px;
+  }
+  @media (max-width: 768px) {
+    display: none;
     margin-right: 10px;
   }
 }
 .menuItem:last-child {
   margin-right: 0px;
+}
+
+.mobileMenuButton {
+  display: none;
+  padding: 0;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 }
