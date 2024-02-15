@@ -18,7 +18,9 @@ const GlobalStyles = createGlobalStyle`
     vertical-align: baseline;
   }
   body{
-     background-color: #f4f4f4;
+    background-color: #f4f4f4;
+    max-width: 1920px;
+    height: 100vh;
   }
   ol, ul{
     list-style: none;

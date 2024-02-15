@@ -1,0 +1,7 @@
+.section {
+  max-width: 760px;
+  min-width: 320px;
+  height: 100vh;
+  background-color: #fefefe;
+  margin: 0 auto;
+}

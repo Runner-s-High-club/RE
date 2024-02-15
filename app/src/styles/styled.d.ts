@@ -23,6 +23,10 @@ declare module 'styled-components' {
       bg_gray000: string;
       bg_gray100: string;
       bg_gray200: string;
+      bg_gray300: string;
+
+      text_4e5968: string;
+      text_333: string;
     };
     fonts: {
       button_L: string;
