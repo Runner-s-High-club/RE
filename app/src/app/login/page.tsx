@@ -48,7 +48,7 @@ const LoginSection = styled.section`
 `;
 
 const LogoTitle = styled.h2`
-  margin-top: 160px;
+  margin-top: 140px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.primary};
 `;

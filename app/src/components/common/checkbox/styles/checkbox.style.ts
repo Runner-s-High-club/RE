@@ -6,10 +6,13 @@ export const CheckBoxWrap = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  input {
+    width: 14px;
+    height: 14px;
+  }
   label {
     display: inline-block;
     margin-left: 5px;
-    padding-top: 4px;
     color: #333;
     cursor: pointer;
   }

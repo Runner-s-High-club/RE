@@ -1,0 +1,12 @@
+.joinSection {
+  max-width: 768px;
+  min-width: 320px;
+  height: 100vh;
+  background-color: #fefefe;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.joinSection::-webkit-scrollbar {
+  display: none;
+}
