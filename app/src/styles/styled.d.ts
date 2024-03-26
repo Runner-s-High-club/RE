@@ -27,6 +27,15 @@ declare module 'styled-components' {
 
       text_4e5968: string;
       text_333: string;
+      text_gray0: string;
+      text_gray1: string;
+      text_gray2: string;
+      text_gray3: string;
+      text_gray4: string;
+      text_gray5: string;
+      text_gray6: string;
+      text_gray7: string;
+      text_gray8: string;
     };
     fonts: {
       button_L: string;

@@ -1,20 +1,46 @@
+import { IJoinCheckState } from '@/app/join/page';
 import Checkbox from '@/components/common/checkbox/Checkbox';
 import { styled } from 'styled-components';
+
+interface IJoinAgree {
+  isCheckState: IJoinCheckState;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 /**
  * 회원가입 약관 동의 체크박스 컴포넌트
  * @returns
  */
-const JoinAgree = () => {
+const JoinAgree = ({ isCheckState, onChange }: IJoinAgree) => {
   return (
     <AllCheckBox>
       <AllCheck>
-        <Checkbox id='allCheck' label='전체동의' />
+        <Checkbox
+          id='allCheck'
+          checked={isCheckState.allCheck}
+          label='전체동의'
+          onChange={onChange}
+        />
       </AllCheck>
       <AllInfoTextBox>
-        <Checkbox id='service' label='서비스 이용약관 (필수)' />
-        <Checkbox id='useInfo' label='개인정보 수집 및 이용동의 (필수)' />
-        <Checkbox id='state' label='위치기반서비스 이용약관 (선택)' />
+        <Checkbox
+          id='serviceCheck'
+          checked={isCheckState.serviceCheck}
+          label='서비스 이용약관 (필수)'
+          onChange={onChange}
+        />
+        <Checkbox
+          id='useInfoCheck'
+          checked={isCheckState.useInfoCheck}
+          label='개인정보 수집 및 이용동의 (필수)'
+          onChange={onChange}
+        />
+        <Checkbox
+          id='locationCheck'
+          checked={isCheckState.locationCheck}
+          label='위치기반서비스 이용약관 (선택)'
+          onChange={onChange}
+        />
       </AllInfoTextBox>
     </AllCheckBox>
   );
@@ -33,19 +59,7 @@ const AllCheck = styled.div`
 
 const AllCheckBox = styled.div`
   margin-top: 20px;
-  height: 80px;
-`;
-
-const AgreeTextarea = styled.textarea`
-  color: #858585;
-  padding: 10px;
-  /* margin-left: 6%; */
-  margin-top: 10px;
-  height: calc(100% - 36%);
-  width: calc(100%);
-  border-radius: 5px;
-  resize: none;
-  border: 1px solid ${({ theme }) => theme.colors.bg_gray300};
+  height: 150px;
 `;
 
 const AllInfoTextBox = styled.div`
