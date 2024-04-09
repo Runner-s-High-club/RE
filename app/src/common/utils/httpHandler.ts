@@ -38,9 +38,10 @@ export const httpHandler = {
       });
       const res = await req.json();
       if (res.code === services.code.success) {
-        return res.contents;
-      } else if (res.code === services.code.fail) {
+        return res;
+      } else {
         console.log(`fail ${pPath} api`);
+        return res;
       }
     } catch (error) {
       throw new Error(`error ${pPath} api`);
@@ -55,7 +56,7 @@ export const httpHandler = {
    */
   async post<T>(path: string, pReq: object): Promise<T | null> {
     try {
-      const req = await fetch(services.api.host + path, {
+      const req = await fetch('/' + path, {
         method: services.api.method.post,
         headers: {
           'Content-Type': services.api.contentType,
@@ -64,9 +65,10 @@ export const httpHandler = {
       });
       const res = await req.json();
       if (res.code === services.code.success) {
-        return res.contents;
-      } else if (res.code === services.code.fail) {
+        return res;
+      } else {
         console.log(`fail ${path} api`);
+        return res;
       }
     } catch (error) {
       throw new Error(`error ${path} api`);
