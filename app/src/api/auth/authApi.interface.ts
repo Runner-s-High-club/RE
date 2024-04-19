@@ -14,3 +14,10 @@ export interface ISmsCodeCheckParam {
   authNumber: string;
   phoneNumber: string;
 }
+
+/** 핸드폰 인증 반환 값 인터페이스  */
+export interface ISmsCodeCheck {
+  code: string;
+  message: string;
+  data: null;
+}

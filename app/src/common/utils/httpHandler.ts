@@ -32,10 +32,19 @@ export const httpHandler = {
       .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
       .join('&');
     try {
-      const req = await fetch(services.api.host + pPath + '?' + query, {
-        method: services.api.method.get,
-        ...fetchType,
-      });
+      const req = await fetch(
+        services.api.host +
+          '/' +
+          services.api.version +
+          '/' +
+          pPath +
+          '?' +
+          query,
+        {
+          method: services.api.method.get,
+          ...fetchType,
+        }
+      );
       const res = await req.json();
       if (res.code === services.code.success) {
         return res;
@@ -48,6 +57,7 @@ export const httpHandler = {
     }
     return null;
   },
+
   /**
    * fetch post 업무 수행
    * @param path string
@@ -56,7 +66,7 @@ export const httpHandler = {
    */
   async post<T>(path: string, pReq: object): Promise<T | null> {
     try {
-      const req = await fetch('/' + path, {
+      const req = await fetch('/' + services.api.version + '/' + path, {
         method: services.api.method.post,
         headers: {
           'Content-Type': services.api.contentType,

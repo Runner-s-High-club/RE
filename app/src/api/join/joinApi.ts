@@ -11,7 +11,19 @@
 
 import services from '@/common/constants/services';
 import { httpHandler } from '@/common/utils/httpHandler';
-import { IJoinParam } from '@/api/join/joinApi.interface';
+import { IIdCheckReturn, IJoinParam } from '@/api/join/joinApi.interface';
+
+interface IJoinReturn {
+  code: string;
+  message: string;
+  data: {
+    id: number;
+    email: string;
+    memberPwd: string;
+    role: string;
+    memberPhone: string;
+  };
+}
 
 /**
  * 회원가입 관련 api
@@ -22,14 +34,14 @@ const joinApi = () => {
    * @param pMemberId sting
    * @returns {Promise} - 회원 아디지 중복 체크 결과를 나타내는 프로미스 리턴값
    */
-  const idCheck = async (pMemberId: string) => {
-    const idCheckRes = await httpHandler.post(services.url.join.idCheck, {
-      email: pMemberId,
-    });
-
-    if (idCheckRes) {
-      return idCheckRes;
-    }
+  const idCheck = async (pMemberId: string): Promise<IIdCheckReturn> => {
+    const idCheckRes = await httpHandler.post<IIdCheckReturn>(
+      services.url.enquiry.idCheck,
+      {
+        email: pMemberId,
+      }
+    );
+    return idCheckRes as IIdCheckReturn;
   };
 
   /**
@@ -40,7 +52,7 @@ const joinApi = () => {
    * @param {string} params.memberPwd - 회원 비밀번호
    * @param {string} params.birth - 회원 생년월일
    * @param {string} params.memberPhone - 회원 전화번호
-   * @param {string} params.memberAgree - 회원 약관 동의 여부
+   * @param {string} params.agreeDTO - 회원 약관 동의 여부
    * @returns  {Promise} - 회원 가입 결과를 나타내는 프로미스
    */
   const join = async ({
@@ -49,19 +61,22 @@ const joinApi = () => {
     memberPwd,
     birth,
     memberPhone,
-    memberAgree,
+    agreeDTO,
   }: IJoinParam) => {
-    const joinRes = await httpHandler.post(services.url.join.idCheck, {
-      memberEmail,
-      memberNm,
-      memberPwd,
-      birth,
-      memberPhone,
-      memberAgree,
-    });
+    const joinRes = await httpHandler.post<IJoinReturn>(
+      services.url.join.join,
+      {
+        memberEmail,
+        memberNm,
+        memberPwd,
+        birth,
+        memberPhone,
+        agreeDTO,
+      }
+    );
 
-    if (joinRes) {
-      return joinRes;
+    if (joinRes?.code === services.code.success) {
+      return joinRes.data;
     }
   };
 

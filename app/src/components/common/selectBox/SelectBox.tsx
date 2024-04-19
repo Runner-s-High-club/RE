@@ -23,6 +23,7 @@ interface ISelectBox {
   data: ISelectData[];
   placeholder?: string;
   defaultValue: string;
+  selectCallback: (pValue: string) => void;
 }
 
 /**
@@ -30,7 +31,12 @@ interface ISelectBox {
  * @property { string } propsName 설명
  * @returns React.JSX.Element
  */
-const SelectBox = ({ data, placeholder, defaultValue }: ISelectBox) => {
+const SelectBox = ({
+  data,
+  placeholder,
+  defaultValue,
+  selectCallback,
+}: ISelectBox) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const [selectValue, setSelectValue] = useState<string>(defaultValue);
@@ -42,6 +48,7 @@ const SelectBox = ({ data, placeholder, defaultValue }: ISelectBox) => {
 
   /** 셀렉트 이벤트 핸들러  */
   const selectEventHandler = (pSelectItem: ISelectData) => {
+    selectCallback(pSelectItem.value);
     setSelectValue(pSelectItem.label);
     setIsSelected((prev) => {
       return false;
@@ -131,6 +138,7 @@ const SelectOptionItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.text_gray1};
   height: 30px;
   display: flex;
+  min-width: 110px;
   align-items: center;
   padding-left: 10px;
   color: ${({ theme }) => theme.colors.text_gray4};

@@ -1,11 +1,15 @@
 'use client';
 import Button from '@/components/common/button/Button';
 import Space from '@/components/common/space/Space';
-import JoinAgree from '@/components/feature/join/agree/JoinAgree';
+import JoinAgree from '@/components/feature/join/JoinAgree';
 import { useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import JoinInputContent from './components/JoinInputContent';
+import JoinInputContent from '@/components/feature/join/JoinInputContent';
 import usePasswordCheck from '@/hooks/usePasswordCheck';
+import authApi from '@/api/auth/authApi';
+import joinApi from '@/api/join/joinApi';
+import services from '@/common/constants/services';
+import { useRouter } from 'next/navigation';
 
 export interface IJoinInputState {
   useId: string;
@@ -15,6 +19,7 @@ export interface IJoinInputState {
   useNm: string;
   nickName: string;
   birthDay: string;
+  smsCode: string;
 }
 
 export interface IJoinCheckState {
@@ -26,6 +31,11 @@ export interface IJoinCheckState {
 
 /** 회원가입 페이지 */
 const JoinPage = (): JSX.Element => {
+  const router = useRouter();
+  /** 인증 api */
+  const authApiController = authApi();
+  /** 회원가입 관련 api */
+  const joinApiController = joinApi();
   /** 회원가입 회원정보 input 상태 */
   const [joinInputState, setJoinInputState] = useState<IJoinInputState>({
     useId: '',
@@ -35,6 +45,7 @@ const JoinPage = (): JSX.Element => {
     useNm: '',
     nickName: '',
     birthDay: '',
+    smsCode: '',
   });
 
   /** 회원가입 약관동의 체크박스 상태  */
@@ -54,8 +65,15 @@ const JoinPage = (): JSX.Element => {
     isUserNm: true,
   });
 
+  /** 인증 번호 클릭 유무 */
+  const [isClickedSmsBtn, setIsClickedSmsBtn] = useState<boolean>(false);
+
+  /** 선택 이메일 상태 */
+  const [email, setEmail] = useState('gmail.com');
+
   /** 패스워드 유효성 검사 hook  */
   const isPasswordValidCheck = usePasswordCheck;
+
   /** 회원가입 input onChang event */
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -81,8 +99,31 @@ const JoinPage = (): JSX.Element => {
     }
     setJoinInputState((prev) => ({
       ...prev,
-      [id]: value,
+      [id]: value.trim(),
     }));
+  };
+
+  /**
+   * 이메일 셀렉터 콜백 함수
+   */
+  const emailSelectCallback = (pEmail: string) => {
+    setEmail(pEmail);
+  };
+
+  /**
+   * 아이디 체크 api
+   */
+  const idCheck = async () => {
+    const useId = `${joinInputState.useId + '@' + email}`;
+    const idCheck = await joinApiController.idCheck(useId);
+    // 아이디 사용 가능 아이디
+    if (idCheck.code === services.code.success) {
+      joinDisabled.current.isUseId = false;
+      // TODO: 앱뷰로 동작 될시 데이터를 보내줘는 로직으로 변경
+      window.alert('사용 가능한 ID 입니다.');
+    } else if (idCheck.code === services.code.join.existingId) {
+      window.alert(idCheck.message);
+    }
   };
 
   /** 회원가입 약관 동의 onChange event */
@@ -105,15 +146,35 @@ const JoinPage = (): JSX.Element => {
     }
   };
 
-  /** 핸드폰 인증 번호 요청 */
-  const requestSmsCode = () => {
-    console.log(`requestSmsCode 실행됨 :`);
+  /** 핸드폰 인증 번호 요청
+   * @param { string } pPhoneNum 핸드폰 번호
+   */
+  const requestSmsCode = async (pPhoneNum: string) => {
+    await authApiController.getSmsCode(pPhoneNum);
+    setIsClickedSmsBtn(() => {
+      return true;
+    });
   };
 
-  /** 인증 번호 입력 */
-  const postSmsCodeCallback = () => {
-    console.log(`postSmsCodeCallback 실행됨 :`);
-    joinDisabled.current.isPhone = false;
+  // TODO: 인증 번호 예외 처리 추가 해야함 1. 인증 횟수 2. 인증이 완료 되었다면 더이상 못 누르게
+  /** 인증 번호 입력
+   * @param { string } pSmsCode sms 인증 코드
+   */
+  const postSmsCodeCallback = async () => {
+    const smsCheck = await authApiController.smsCodeCheck({
+      authNumber: joinInputState.smsCode,
+      phoneNumber: joinInputState.phoneNum,
+    });
+    /** 핸드폰 인증 유효성 검사  */
+    if (smsCheck) {
+      window.alert('인증이 완료 되었습니다.');
+      joinDisabled.current.isPhone = false;
+      setIsClickedSmsBtn(() => {
+        return false;
+      });
+    } else {
+      window.alert('인증 번호를 다시 확인해주세요.');
+    }
   };
 
   /** 회원가입 유효성 검사  */
@@ -131,9 +192,25 @@ const JoinPage = (): JSX.Element => {
   }, [isCheckedState.serviceCheck, isCheckedState.useInfoCheck, isJoinValid]);
 
   /** 회원가입 event */
-
-  const completeJoin = () => {
-    console.log(`회원가입 완료  :`);
+  const completeJoin = async () => {
+    const useId = `${joinInputState.useId + '@' + email}`;
+    const joinRes = await joinApiController.join({
+      memberEmail: useId,
+      memberNm: joinInputState.useNm,
+      memberPwd: joinInputState.password,
+      birth: joinInputState.birthDay,
+      memberPhone: joinInputState.phoneNum.replace(/-/g, ''),
+      agreeDTO: {
+        firstSelAgree: '1',
+        secondSelAgree: '1',
+        thirdSelAgree: '1',
+      },
+    });
+    if (joinRes?.id) {
+      router.replace('/join/complete');
+    } else {
+      window.alert('회원 가입에 실패 하였습니다. 기입 정보를 확인해주세요.');
+    }
   };
 
   return (
@@ -146,6 +223,9 @@ const JoinPage = (): JSX.Element => {
           onChange={onChangeInput}
           requestSmsCodeCallback={requestSmsCode}
           postSmsCodeCallback={postSmsCodeCallback}
+          emailSelectCallback={emailSelectCallback}
+          idCheckCallback={idCheck}
+          isClickedSmsBtn={isClickedSmsBtn}
         />
         <Space top={40} />
         {/* 약관동의 컴포넌트 체크박스 */}

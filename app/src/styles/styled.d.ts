@@ -41,6 +41,9 @@ declare module 'styled-components' {
       button_L: string;
       button_M: string;
       button_S: string;
+
+      text_13: string;
+      text_17: string;
     };
   }
 }

@@ -1,8 +1,8 @@
 // =============================================================================
-// File    :  usePasswordCheck.tsx
+// File    :  ErrorLabel.tsx
 // Class   :
-// Purpose :  usePasswordCheck
-// Date    :  2024.03
+// Purpose :  ErrorLabel
+// Date    :  2024.04
 // Author  :  JHS
 // History :
 // =============================================================================
@@ -10,16 +10,20 @@
 // =============================================================================
 
 import React from 'react';
+import * as Styles from '@/components/common/label/styles/errorLabel.style';
+
+interface IErrorLabel {
+  label: string;
+}
 
 /**
- * 패스워드 유효성 검사 hook
- * @property { string } password value
+ *
+ * @param
+ * @property { string } propsName 설명
  * @returns React.JSX.Element
  */
-const usePasswordCheck = (pValue: string) => {
-  const passwordPattern =
-    /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-  return passwordPattern.test(pValue);
+const ErrorLabel = ({ label }: IErrorLabel) => {
+  return <Styles.Label>{label}</Styles.Label>;
 };
 
-export default usePasswordCheck;
+export default ErrorLabel;

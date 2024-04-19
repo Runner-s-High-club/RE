@@ -1,5 +1,6 @@
 export default Object.freeze({
   api: {
+    version: 'api/v1',
     host: 'http://3.38.21.254:80',
     contentType: 'application/json; charset=utf-8',
     method: {
@@ -8,9 +9,11 @@ export default Object.freeze({
     },
   },
   url: {
-    join: {
+    enquiry: {
       /** 아이디 체크  */
-      idCheck: 'join/idCheck',
+      idCheck: 'enquiry/idCheck',
+    },
+    join: {
       /** 회원 가입 */
       join: 'join',
     },

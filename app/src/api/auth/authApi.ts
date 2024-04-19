@@ -11,7 +11,10 @@
 
 import services from '@/common/constants/services';
 import { httpHandler } from '@/common/utils/httpHandler';
-import { ISmsCodeCheckParam } from '@/api/auth/authApi.interface';
+import {
+  ISmsCodeCheckParam,
+  ISmsCodeCheck,
+} from '@/api/auth/authApi.interface';
 
 /**
  * 인증 관려 api
@@ -39,13 +42,17 @@ const authApi = () => {
     authNumber,
     phoneNumber,
   }: ISmsCodeCheckParam) => {
-    const smsCodeCheckRes = await httpHandler.post(services.url.auth.smsCheck, {
-      authNumber,
-      phoneNumber,
-    });
-
-    if (smsCodeCheckRes) {
-      return smsCodeCheckRes;
+    const smsCodeCheckRes = await httpHandler.post<ISmsCodeCheck>(
+      services.url.auth.smsCheck,
+      {
+        authNumber,
+        phoneNumber,
+      }
+    );
+    if (smsCodeCheckRes?.code === services.code.success) {
+      return true;
+    } else {
+      return false;
     }
   };
 
