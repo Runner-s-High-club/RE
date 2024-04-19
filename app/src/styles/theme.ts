@@ -21,11 +21,23 @@ const theme = {
 
     text_333: '#333',
     text_4e5968: '#4e5968',
+    text_gray0: '#D6D6D6',
+    text_gray1: '#ADADAD',
+    text_gray2: '#858585',
+    text_gray3: '#5C5C5C',
+    text_gray4: '#333333',
+    text_gray5: '#292929',
+    text_gray6: '#1F1F1F',
+    text_gray7: '#141414',
+    text_gray8: '#0A0A0A',
   },
   fonts: {
     button_L: '1rem',
     button_M: '0.875rem',
     button_S: '0.5rem',
+
+    text_13: '13px',
+    text_17: '17px',
   },
 };
 
